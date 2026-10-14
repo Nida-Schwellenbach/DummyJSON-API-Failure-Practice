@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Run API Tests') {
+        stage('Run API Tests with Newman') {
             steps {
                 bat '''
                     newman run "DummyJSON_API_Failure_Practice.postman_collection.json" -e "postman_environment.json" -r cli,htmlextra --reporter-htmlextra-export "newman-report.html"
