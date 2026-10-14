@@ -2,11 +2,17 @@
 pipeline {
     agent any
 
+    environment {
+        COLLECTION = 'DummyJSON_API_Failure_Practice.postman_collection.json'
+        ENVIRONMENT = 'postman_environment.json'
+        REPORT = 'newman-report.html'
+    }
+
     stages {
         stage('Run API Tests with Newman') {
             steps {
                 bat '''
-                    newman run "DummyJSON_API_Failure_Practice.postman_collection.json" -e "postman_environment.json" -r cli,htmlextra --reporter-htmlextra-export "newman-report.html"
+                    newman run "%COLLECTION%" -e "%ENVIRONMENT%" -r cli,htmlextra --reporter-htmlextra-export "%REPORT%"
                 '''
             }
         }
